@@ -1,17 +1,16 @@
 class Solution {
     public boolean isCovered(int[][] ranges, int left, int right) {
-        Arrays.sort(ranges, (a, b) -> a[0] - b[0]);
-        for(int i=0; i<ranges.length; i++){
-            if(left>right){
-                return true;
-            }
-            if(ranges[i][0]>left){
-                return false;
-            }
-            if(ranges[i][1]>=left){
-                left=ranges[i][1]+1;
+        boolean[] arr = new boolean[51];
+        for (int[] range : ranges) {
+            for (int i = range[0]; i <= range[1]; i++) {
+                arr[i] = true;
             }
         }
-        return left>right;
+        for (int i = left; i <= right; i++) {
+            if (!arr[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
