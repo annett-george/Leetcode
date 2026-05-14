@@ -1,10 +1,9 @@
 class Solution {
     public int pivotInteger(int n) {
         int total=(n*(n+1))/2;
-        for(int i=0; i<=n; i++){
-            if(i*i==total){
-                return i;
-            }
+        int x =(int)Math.sqrt(total);
+        if(x*x==total){
+            return x;
         }
         return -1;
     }
