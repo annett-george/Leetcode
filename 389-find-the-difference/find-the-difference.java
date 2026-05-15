@@ -1,18 +1,10 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        int[] freq = new int[26];
+        int sum=0;
         for(int i=0; i<s.length(); i++){
-            char ch = s.charAt(i);
-            freq[ch-'a']--;
-            ch=t.charAt(i);
-            freq[ch-'a']++;
+            sum+=t.charAt(i)-s.charAt(i);
         }
-        freq[t.charAt(t.length()-1)-'a']++;
-        for(int i=0; i<26; i++){
-            if(freq[i]==1){
-                return (char)(i+'a');
-            }
-        }
-        return 'a';
+        sum+=t.charAt(t.length()-1);
+        return (char)sum;
     }
 }
