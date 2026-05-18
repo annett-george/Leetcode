@@ -1,25 +1,45 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
         List<List<Integer>> res = new ArrayList<>();
+
         Arrays.sort(candidates);
-        combinations(0,candidates,target,new ArrayList<>(), res);
+
+        solve(0,candidates,target,
+              new ArrayList<>(),res);
+
         return res;
     }
-    public void combinations(int i, int[] arr, int target, List<Integer> list, List<List<Integer>> res ){
-        if(i==arr.length || target<=0){
-            if(target==0){
-                res.add(new ArrayList<>(list));
-            }
+
+    public void solve(int start,
+                      int[] arr,
+                      int target,
+                      List<Integer> list,
+                      List<List<Integer>> res){
+
+        if(target==0){
+            res.add(new ArrayList<>(list));
             return;
         }
 
-        list.add(arr[i]);
-        combinations(i+1,arr,target-arr[i],list,res);
-        list.remove(list.size()-1);
-        while(i+1<arr.length && arr[i]==arr[i+1]){
-            i++;
+        for(int i=start;i<arr.length;i++){
+
+            
+            if(i>start && arr[i]==arr[i-1])
+                continue;
+
+            if(arr[i]>target)
+                break;
+
+            list.add(arr[i]);
+
+            solve(i+1,
+                  arr,
+                  target-arr[i],
+                  list,
+                  res);
+
+            list.remove(list.size()-1);
         }
-        combinations(i+1,arr,target,list,res);
-        return;
     }
 }
