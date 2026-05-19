@@ -2,8 +2,8 @@ class Solution {
     public void possiblepermutes(int idx, int[] arr, List<List<Integer>> ans){
         if(idx==arr.length){
             List<Integer> list = new ArrayList<>();
-            for(int i=0; i<arr.length; i++){
-                list.add(arr[i]);
+            for(int nums:arr){
+                list.add(nums);
             }
             ans.add(new ArrayList<>(list));
             return;
