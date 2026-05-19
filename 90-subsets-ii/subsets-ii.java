@@ -1,16 +1,14 @@
 class Solution {
     public void findsubsets(int i, int[] arr, List<Integer> list, List<List<Integer>> ans){
-        if(i==arr.length){
-            ans.add(new ArrayList<>(list));
-            return;
+        ans.add(new ArrayList<>(list));
+        for(int j=i; j<arr.length; j++){
+            if(j>i && arr[j]==arr[j-1]){
+                continue;
+            }
+            list.add(arr[j]);
+            findsubsets(j+1,arr,list,ans);
+            list.remove(list.size()-1);
         }
-        list.add(arr[i]);
-        findsubsets(i+1,arr,list,ans);
-        list.remove(list.size()-1);
-        while(i<arr.length-1 && arr[i]==arr[i+1]){
-            i++;
-        }
-        findsubsets(i+1,arr,list,ans);
     }
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
