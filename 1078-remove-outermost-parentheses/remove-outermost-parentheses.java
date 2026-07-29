@@ -4,10 +4,10 @@ class Solution {
         int count=0;
         for(Character ch: s.toCharArray()){
             if(ch=='('){
-                if(count!=0){
+                count--;
+                if(count!=-1){
                     str.append(ch);
                 }
-                count--;
             }
             else{
                 count++;
