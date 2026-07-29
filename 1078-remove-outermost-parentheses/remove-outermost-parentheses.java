@@ -9,7 +9,7 @@ class Solution {
                     str.append(ch);
                 }
             }
-            else{
+            else if(ch==')'){
                 count++;
                 if(count!=0){
                     str.append(ch);
