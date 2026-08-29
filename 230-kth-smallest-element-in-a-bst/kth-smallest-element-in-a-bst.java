@@ -14,21 +14,22 @@
  * }
  */
 class Solution {
+    int count=0;
+    int result=0;
     public int kthSmallest(TreeNode root, int k) {
-        Stack<TreeNode> st = new Stack<>();
-        TreeNode node = root;
-        while(!st.isEmpty() || node!=null){
-            while(node!=null){
-                st.push(node);
-                node=node.left;
-            }
-            node=st.pop();
-            k--;
-            if(k==0){
-                return node.val;
-            }
-            node=node.right;
+        inorder(root,k);
+        return result;
+    }
+    public void inorder(TreeNode root, int k){
+        if(root==null){
+            return;
         }
-        return 0;
+        inorder(root.left,k);
+        count++;
+        if(count==k){
+            result = root.val;
+            return;
+        }
+        inorder(root.right,k);
     }
 }
