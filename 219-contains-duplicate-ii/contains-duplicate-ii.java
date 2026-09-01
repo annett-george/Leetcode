@@ -8,6 +8,7 @@ class Solution {
             }
             else{
                 m = Math.min(m,i-hm.get(nums[i]));
+                if(m<=k) return true;
                 hm.put(nums[i],i);
             }
         }
