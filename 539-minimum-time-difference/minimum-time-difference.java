@@ -1,17 +1,29 @@
 class Solution {
     public int findMinDifference(List<String> timePoints) {
-        int time = 1500;
-        Collections.sort(timePoints);
-        for(int i=0; i<timePoints.size(); i++){
-            int j = i==timePoints.size()-1 ? 0 :i+1;
-            String[] t1 = timePoints.get(i).split(":");
-            String[] t2 = timePoints.get(j).split(":");
-            int m1= Integer.parseInt(t1[0])*60 + Integer.parseInt(t1[1]);
-            int m2 = Integer.parseInt(t2[0])*60 + Integer.parseInt(t2[1]);
-            int diff = Math.abs(m1-m2);
-            diff = Math.min(diff,1440-diff);
-            time= Math.min(time,diff);
+        boolean[] seen = new boolean[1440];
+        for(String str: timePoints){
+            int h = Integer.parseInt(str.substring(0,2));
+            int m = Integer.parseInt(str.substring(3,5));
+            int min = h*60+ m;
+            if(seen[min]){
+                return 0;
+            }
+            seen[min]=true;
         }
+        int time=1500;
+        int prev=-1, first=-1;
+        for(int i=0; i<1440; i++){
+            if(seen[i]){
+                if(first==-1){
+                    first=i;
+                }
+                else{
+                    time=Math.min(time,i-prev);
+                }
+                prev=i;
+            }
+        }
+        time = Math.min(time,1440-prev+first);
         return time;
     }
 }
