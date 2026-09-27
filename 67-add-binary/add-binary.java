@@ -10,8 +10,22 @@ class Solution {
             if(j>=0){
                 sum+=b.charAt(j)-'0';
             }
-            str.append(sum%2);
-            carry=sum/2;
+            if(sum==0){
+                str.append('0');
+                carry=0;
+            }
+            else if(sum==1){
+                str.append('1');
+                carry=0;
+            }
+            else if(sum==2){
+                str.append('0');
+                carry=1;
+            }
+            else{
+                str.append('1');
+                carry=1;
+            }
         }
         if(carry==1){
             str.append('1');
