@@ -1,19 +1,18 @@
 class Solution {
     public boolean isHappy(int n) {
-        int sq=n;
-        HashSet<Integer> set = new HashSet<>();
-        while(sq!=1){
-            int dup = sq;
-            sq =0;
-            while(dup!=0){
-                sq += (dup%10)*(dup%10);
-                dup/=10;
-            }
-            if(set.contains(sq)){
-                return false;
-            }
-            set.add(sq);
+        int slow = n, fast = n;
+        do{
+            slow= sq(slow);
+            fast=sq(sq(fast));
+        }while(slow!=fast);
+        return slow==1;
+    }
+    public int sq(int n){
+        int sum=0;
+        while(n>0){
+            sum+=(n%10)*(n%10);
+            n/=10;
         }
-        return true;
+        return sum;
     }
 }
